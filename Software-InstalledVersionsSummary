@@ -1,0 +1,16 @@
+/*
+Report Name: Software - Installed Versions
+Description: This report shows the number of versions of all Software Applications installed on your network
+Author: Brian Steingraber
+Version: 1.0
+Notes: This report requires the custom attribute "device_status" set to In Production.
+Version History:
+1.0 - 6.3.2020 - Original
+*/
+SELECT software.name, COUNT(DISTINCT software_installations.version) as "Versions"
+FROM software_installations
+JOIN software on software.id = software_installations.software_id
+JOIN devices on devices.id = software_installations.computer_id
+WHERE devices.c_device_status = 'In Production'
+GROUP BY software_id
+ORDER BY Versions DESC, software.name
