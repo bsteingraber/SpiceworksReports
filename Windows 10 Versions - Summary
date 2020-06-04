@@ -1,0 +1,36 @@
+/*
+Windows 10 Versions - Summary
+-- Author: Brian Steingraber
+-- Version: 1.7 (May 2020)
+-- Change Log
+-- 1.7 - Updated to include versions 1909 and 2004
+*/
+
+SELECT 'Windows 10 1809' AS 'Version', COUNT(*) AS 'Count'
+FROM Devices
+WHERE version = "10.0.17763"
+AND devices.type = "Computer"
+AND (devices.device_type = 'Desktop' OR devices.device_type = "Laptop")
+and c_device_status = 'In Production'
+AND raw_operating_system NOT Like '%LTSC%'
+UNION
+SELECT 'Windows 10 1903' AS 'Version', COUNT(*) AS 'Count'
+FROM Devices
+WHERE version = "10.0.18362"
+AND devices.type = "Computer"
+AND (devices.device_type = 'Desktop' OR devices.device_type = "Laptop")
+and c_device_status = 'In Production'
+UNION
+SELECT 'Windows 10 1909' AS 'Version', COUNT(*) AS 'Count'
+FROM Devices
+WHERE version = "10.0.18363"
+AND devices.type = "Computer"
+AND (devices.device_type = 'Desktop' OR devices.device_type = "Laptop")
+and c_device_status = 'In Production'
+UNION
+SELECT 'Windows 10 2004' AS 'Version', COUNT(*) AS 'Count'
+FROM Devices
+WHERE version > "10.0.18363"
+AND devices.type = "Computer"
+AND (devices.device_type = 'Desktop' OR devices.device_type = "Laptop")
+and c_device_status = 'In Production'
